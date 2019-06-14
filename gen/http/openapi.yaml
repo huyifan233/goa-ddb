@@ -1,0 +1,342 @@
+swagger: "2.0"
+info:
+  title: Calculator Service
+  description: HTTP service for adding numbers, a goa teaser
+  version: ""
+host: localhost:8088
+consumes:
+- application/json
+- application/xml
+- application/gob
+produces:
+- application/json
+- application/xml
+- application/gob
+paths:
+  /resumes/add/{a}/{b}:
+    get:
+      tags:
+      - calc
+      summary: add calc
+      operationId: calc#add
+      parameters:
+      - name: a
+        in: path
+        description: Left operand
+        required: true
+        type: integer
+      - name: b
+        in: path
+        description: Right operand
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK response.
+          schema:
+            type: integer
+            format: int64
+      schemes:
+      - http
+  /resumes/addresume:
+    post:
+      tags:
+      - calc
+      summary: addresume calc
+      operationId: calc#addresume
+      parameters:
+      - name: array
+        in: body
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/ResumeRequestBody'
+      responses:
+        "200":
+          description: OK response.
+          schema:
+            type: array
+            items:
+              type: integer
+              example: 3413838396163011485
+              format: int64
+      schemes:
+      - http
+  /resumes/getresumes:
+    get:
+      tags:
+      - calc
+      summary: list calc
+      operationId: calc#list
+      responses:
+        "200":
+          description: OK response.
+          schema:
+            $ref: '#/definitions/CalcStoredResumeResponseCollection'
+      schemes:
+      - http
+definitions:
+  CalcStoredResumeResponseCollection:
+    title: 'Mediatype identifier: application/vnd.goa.resume; type=collection; view=default'
+    type: array
+    items:
+      $ref: '#/definitions/StoredResumeResponse'
+    description: ListResponseBody is the result type for an array of StoredResumeResponse
+      (default view)
+    example:
+    - created_at: Consequatur quis dolorum.
+      education:
+      - institution: Incidunt qui mollitia et quis.
+        major: Voluptas sed neque consequatur maiores aut sed.
+      - institution: Incidunt qui mollitia et quis.
+        major: Voluptas sed neque consequatur maiores aut sed.
+      experience:
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      id: 8911575947792470240
+      name: Accusantium culpa odit eaque.
+    - created_at: Consequatur quis dolorum.
+      education:
+      - institution: Incidunt qui mollitia et quis.
+        major: Voluptas sed neque consequatur maiores aut sed.
+      - institution: Incidunt qui mollitia et quis.
+        major: Voluptas sed neque consequatur maiores aut sed.
+      experience:
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      id: 8911575947792470240
+      name: Accusantium culpa odit eaque.
+  EducationRequestBody:
+    title: EducationRequestBody
+    type: object
+    properties:
+      institution:
+        type: string
+        description: Name of the institution
+        example: Enim possimus.
+      major:
+        type: string
+        description: Major name
+        example: Beatae velit consequuntur.
+    example:
+      institution: Illum voluptatem possimus quidem excepturi et molestiae.
+      major: Corporis dolore a in.
+    required:
+    - institution
+    - major
+  EducationResponse:
+    title: EducationResponse
+    type: object
+    properties:
+      institution:
+        type: string
+        description: Name of the institution
+        example: Blanditiis laudantium molestiae nobis dolorem sunt.
+      major:
+        type: string
+        description: Major name
+        example: Omnis dolores accusantium doloribus qui.
+    example:
+      institution: Dolore qui consequuntur qui dolor.
+      major: Ipsum nostrum cumque deserunt labore hic rerum.
+    required:
+    - institution
+    - major
+  ExperienceRequestBody:
+    title: ExperienceRequestBody
+    type: object
+    properties:
+      company:
+        type: string
+        description: Name of the company
+        example: Officiis quos voluptates rerum.
+      duration:
+        type: integer
+        description: Duration (in years) in the company
+        example: 4353119450067006442
+        format: int64
+      role:
+        type: string
+        description: Name of the role in the company
+        example: Quas deserunt quos est debitis accusamus.
+    example:
+      company: Inventore accusamus voluptas illum.
+      duration: 7027799303221741680
+      role: Velit labore omnis.
+    required:
+    - company
+    - role
+    - duration
+  ExperienceResponse:
+    title: ExperienceResponse
+    type: object
+    properties:
+      company:
+        type: string
+        description: Name of the company
+        example: Commodi iusto non accusantium illo aut.
+      duration:
+        type: integer
+        description: Duration (in years) in the company
+        example: 6213538802880623368
+        format: int64
+      role:
+        type: string
+        description: Name of the role in the company
+        example: Quia dolorem fugit a nulla.
+    example:
+      company: Ut beatae sint illo quam consequatur rerum.
+      duration: 2400976892639445848
+      role: Nostrum qui aut vero et.
+    required:
+    - company
+    - role
+    - duration
+  ResumeRequestBody:
+    title: ResumeRequestBody
+    type: object
+    properties:
+      education:
+        type: array
+        items:
+          $ref: '#/definitions/EducationRequestBody'
+        description: Education section in the resume
+        example:
+        - institution: Ex quae facilis necessitatibus.
+          major: Quasi est eum ad.
+        - institution: Ex quae facilis necessitatibus.
+          major: Quasi est eum ad.
+        - institution: Ex quae facilis necessitatibus.
+          major: Quasi est eum ad.
+        - institution: Ex quae facilis necessitatibus.
+          major: Quasi est eum ad.
+      experience:
+        type: array
+        items:
+          $ref: '#/definitions/ExperienceRequestBody'
+        description: Experience section in the resume
+        example:
+        - company: Quo est et.
+          duration: 5058434971892362792
+          role: Aut adipisci temporibus laboriosam.
+        - company: Quo est et.
+          duration: 5058434971892362792
+          role: Aut adipisci temporibus laboriosam.
+        - company: Quo est et.
+          duration: 5058434971892362792
+          role: Aut adipisci temporibus laboriosam.
+      name:
+        type: string
+        description: Name in the resume
+        example: Facilis doloremque qui recusandae rerum dolor.
+    example:
+      education:
+      - institution: Ex quae facilis necessitatibus.
+        major: Quasi est eum ad.
+      - institution: Ex quae facilis necessitatibus.
+        major: Quasi est eum ad.
+      experience:
+      - company: Quo est et.
+        duration: 5058434971892362792
+        role: Aut adipisci temporibus laboriosam.
+      - company: Quo est et.
+        duration: 5058434971892362792
+        role: Aut adipisci temporibus laboriosam.
+      name: Quibusdam nihil perferendis unde.
+    required:
+    - name
+  StoredResumeResponse:
+    title: 'Mediatype identifier: application/vnd.goa.resume; view=default'
+    type: object
+    properties:
+      created_at:
+        type: string
+        description: Time when resume was created
+        example: Voluptas suscipit ut rerum odio.
+      education:
+        type: array
+        items:
+          $ref: '#/definitions/EducationResponse'
+        description: Education section in the resume
+        example:
+        - institution: Incidunt qui mollitia et quis.
+          major: Voluptas sed neque consequatur maiores aut sed.
+        - institution: Incidunt qui mollitia et quis.
+          major: Voluptas sed neque consequatur maiores aut sed.
+        - institution: Incidunt qui mollitia et quis.
+          major: Voluptas sed neque consequatur maiores aut sed.
+        - institution: Incidunt qui mollitia et quis.
+          major: Voluptas sed neque consequatur maiores aut sed.
+      experience:
+        type: array
+        items:
+          $ref: '#/definitions/ExperienceResponse'
+        description: Experience section in the resume
+        example:
+        - company: Quod et facere aperiam.
+          duration: 2574101197078288820
+          role: Rerum ipsam eveniet consequatur omnis velit.
+        - company: Quod et facere aperiam.
+          duration: 2574101197078288820
+          role: Rerum ipsam eveniet consequatur omnis velit.
+      id:
+        type: integer
+        description: ID of the resume
+        example: 7969322314291156173
+        format: int64
+      name:
+        type: string
+        description: Name in the resume
+        example: Impedit dolor consectetur pariatur reiciendis.
+    description: StoredResumeResponse result type (default view)
+    example:
+      created_at: Sint dolor quo quidem voluptas excepturi.
+      education:
+      - institution: Incidunt qui mollitia et quis.
+        major: Voluptas sed neque consequatur maiores aut sed.
+      - institution: Incidunt qui mollitia et quis.
+        major: Voluptas sed neque consequatur maiores aut sed.
+      - institution: Incidunt qui mollitia et quis.
+        major: Voluptas sed neque consequatur maiores aut sed.
+      experience:
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      - company: Quod et facere aperiam.
+        duration: 2574101197078288820
+        role: Rerum ipsam eveniet consequatur omnis velit.
+      id: 6147120769483255500
+      name: Nihil et nobis quo.
+    required:
+    - id
+    - name
+    - experience
+    - education
+    - created_at
